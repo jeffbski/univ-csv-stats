@@ -33,3 +33,12 @@ univ-csv-stats/
 │           └── lib.rs
 │
 └── README.md
+
+## Python setup
+
+```sh
+uv tool install maturin # add $HOME/.local/bin to $PATH or use uvx to run maturin
+cd bindings/python
+uv init
+
+```
