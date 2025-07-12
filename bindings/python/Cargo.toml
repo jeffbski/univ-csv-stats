@@ -1,0 +1,12 @@
+[package]
+name = "univ-csv-stats-python"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "univ-csv-stats"
+crate-type = ["cdylib"]
+
+[dependencies]
+my-project-core = { path = "../../core" }
+pyo3 = { version = "0.19", features = ["extension-module"] }

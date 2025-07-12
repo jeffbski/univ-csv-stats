@@ -1,0 +1,10 @@
+[package]
+name = "univ-csv-stats-core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+
+[dev-dependencies]
+clap = { workspace = true, features = ["derive"] }
