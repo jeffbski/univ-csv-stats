@@ -1,10 +1,21 @@
+default:
+    just --list
+
+# Run CLI example with subset-ibm.csv
+run-cli-subset:
+    cargo run -p univ-csv-stats-core --example cli -- /Users/jeff/Downloads/ibm-trans-anti-money-laundering/subset-ibm.csv
+
 # Run CLI example
 run-cli *ARGS:
-    cargo run --example cli -- {{ARGS}}
+    cargo run -p univ-csv-stats-core --example cli -- {{ ARGS }}
 
 # Build all targets
 build:
-    cargo build --workspace
+    cargo build --workspace --release
+
+# Build core library
+build-core:
+    cargo build -p univ-csv-stats-core --release
 
 # Build Python bindings
 build-python:
@@ -18,6 +29,13 @@ build-nodejs:
 # Run tests
 test:
     cargo test --workspace
+
+test-core:
+    cargo test -p univ-csv-stats-core
+
+[working-directory('bindings/python')]
+test-python:
+    ./.venv/bin/pytest
 
 # Clean all build artifacts
 clean:

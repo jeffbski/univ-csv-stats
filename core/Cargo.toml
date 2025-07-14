@@ -1,10 +1,18 @@
 [package]
 name = "univ-csv-stats-core"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
+
+[lib]
+name = "univ_csv_stats_core"
+path = "src/lib.rs"
 
 [dependencies]
-anyhow = { workspace = true }
+csv = "1.1"
+incr_stats = "1.0.2"
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "2.0.12"
 
 [dev-dependencies]
+anyhow = { workspace = true }
 clap = { workspace = true, features = ["derive"] }

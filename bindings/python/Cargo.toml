@@ -1,12 +1,17 @@
 [package]
-name = "univ-csv-stats-python"
+name = "univ_csv_stats_python"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [lib]
-name = "univ-csv-stats"
+name = "univ_csv_stats_python"
 crate-type = ["cdylib"]
 
 [dependencies]
-my-project-core = { path = "../../core" }
-pyo3 = { version = "0.19", features = ["extension-module"] }
+univ-csv-stats-core = { path = "../../core" }
+pyo3 = { workspace = true, features = ["default", "extension-module"] }
+thiserror = { workspace = true }
+
+[build-dependencies]
+pyo3-build-config = { version = "0.25.1" }

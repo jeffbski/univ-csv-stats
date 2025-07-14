@@ -39,6 +39,9 @@ univ-csv-stats/
 ```sh
 uv tool install maturin # add $HOME/.local/bin to $PATH or use uvx to run maturin
 cd bindings/python
+maturin init --name univ-csv-stats-python --mixed -b pyo3 -v
 uv init
-
+maturin develop --uv
+uv add --dev pytest
+uv run pytest
 ```

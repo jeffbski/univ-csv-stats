@@ -7,9 +7,11 @@ edition = "2024"
 
 
 [workspace]
-members = ["core", "bindings/python", "bindings/nodejs"]
+members = ["core", "bindings/python"]
 
 [workspace.dependencies]
 # Shared dependencies across workspace
 anyhow = "1.0"
 clap = "4.0"
+pyo3 = { version = "0.25.0", features = ["default", "extension-module"] }
+thiserror = "1.0"
