@@ -22,9 +22,9 @@ build-python:
     maturin build --release -m bindings/python/Cargo.toml
 
 # Build Node.js bindings
+[working-directory('bindings/nodejs')]
 build-nodejs:
-    npm install -g napi-rs/cli
-    napi build --release --manifest-path bindings/nodejs/Cargo.toml
+    napi build --platform --release
 
 # Run tests
 test:
@@ -32,6 +32,10 @@ test:
 
 test-core:
     cargo test -p univ-csv-stats-core
+
+[working-directory('bindings/nodejs')]
+test-nodejs:
+    pnpm test
 
 [working-directory('bindings/python')]
 test-python:

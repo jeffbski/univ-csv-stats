@@ -7,7 +7,7 @@ edition = "2024"
 
 
 [workspace]
-members = ["core", "bindings/python"]
+members = ["core", "bindings/nodejs", "bindings/python"]
 
 [workspace.dependencies]
 # Shared dependencies across workspace

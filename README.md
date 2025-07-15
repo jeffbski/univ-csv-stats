@@ -47,3 +47,10 @@ maturin develop --uv
 uv add --dev pytest
 uv run pytest
 ```
+
+## Node.js setup
+
+```
+ pnpm add -g @napi-rs/cli
+
+```
