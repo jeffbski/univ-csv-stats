@@ -1,0 +1,19 @@
+{
+  "name": "univ-csv-stats-nodejs-wasm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "devDependencies": {
+    "ava": "^6.4.1"
+  },
+  "dependencies": {
+    "univ-csv-stats-nodejs-wasm": "link:wasm/pkg"
+  }
+}

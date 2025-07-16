@@ -26,6 +26,11 @@ build-python:
 build-nodejs:
     napi build --platform --release
 
+# Build Node.js wasm bindings
+[working-directory('bindings/nodejs-wasm')]
+build-nodejs-wasm:
+    wasm-pack build --target nodejs --out-dir wasm/pkg
+
 # Run tests
 test:
     cargo test --workspace
@@ -35,6 +40,10 @@ test-core:
 
 [working-directory('bindings/nodejs')]
 test-nodejs:
+    pnpm test
+
+[working-directory('bindings/nodejs-wasm')]
+test-nodejs-wasm:
     pnpm test
 
 [working-directory('bindings/python')]

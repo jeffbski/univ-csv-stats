@@ -54,3 +54,13 @@ uv run pytest
  pnpm add -g @napi-rs/cli
 
 ```
+
+## WASM setup
+
+```
+cargo install wasm-pack
+cargo install cargo-generate
+cargo install wasm-bindgen-cli
+wasm-pack new # or just create
+wasm-pack build --target nodejs --out-dir wasm/pkg
+```
