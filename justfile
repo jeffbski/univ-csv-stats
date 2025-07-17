@@ -7,7 +7,7 @@ run-cli-subset:
 
 # Run CLI example
 run-cli *ARGS:
-    cargo run -p univ-csv-stats-core --example cli -- {{ ARGS }}
+    cargo run -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
 
 # Build all targets
 build:
