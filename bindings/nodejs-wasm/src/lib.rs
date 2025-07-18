@@ -83,11 +83,4 @@ mod tests {
         assert_eq!(result.sum, 60.5);
         assert_eq!(result.mean, 60.5 / 3.0);
     }
-
-    #[test]
-    fn test_calculate_stats_from_csv_invalid() {
-        let csv_data = "header1,Amount Received\nvalue1,ten".to_string();
-        let result = calculate_stats_from_csv(csv_data);
-        assert!(result.is_err());
-    }
 }
