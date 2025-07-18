@@ -32,6 +32,8 @@ impl From<PyStatsError> for PyErr {
 #[derive(Debug, PartialEq)]
 pub struct PySelectedStats {
     #[pyo3(get)]
+    pub count: u32,
+    #[pyo3(get)]
     pub min: f64,
     #[pyo3(get)]
     pub max: f64,
@@ -39,6 +41,14 @@ pub struct PySelectedStats {
     pub sum: f64,
     #[pyo3(get)]
     pub mean: f64,
+    #[pyo3(get)]
+    pub variance: f64,
+    #[pyo3(get)]
+    pub standard_deviation: f64,
+    #[pyo3(get)]
+    pub skewness: f64,
+    #[pyo3(get)]
+    pub kurtosis: f64,
 }
 
 // This implementation allows us to easily convert the core library's
@@ -46,10 +56,15 @@ pub struct PySelectedStats {
 impl From<CoreSelectedStats> for PySelectedStats {
     fn from(stats: CoreSelectedStats) -> Self {
         Self {
+            count: stats.count,
             min: stats.min,
             max: stats.max,
             sum: stats.sum,
             mean: stats.mean,
+            variance: stats.variance,
+            standard_deviation: stats.standard_deviation,
+            skewness: stats.skewness,
+            kurtosis: stats.kurtosis,
         }
     }
 }

@@ -15,10 +15,15 @@ use univ_csv_stats_core::{
 #[napi(object)]
 #[derive(Debug)]
 pub struct SelectedStats {
+  pub count: u32,
   pub min: f64,
   pub max: f64,
   pub sum: f64,
   pub mean: f64,
+  pub variance: f64,
+  pub standard_deviation: f64,
+  pub skewness: f64,
+  pub kurtosis: f64,
 }
 
 /// This implementation allows for a clean conversion from the core library's
@@ -26,10 +31,15 @@ pub struct SelectedStats {
 impl From<CoreSelectedStats> for SelectedStats {
   fn from(stats: CoreSelectedStats) -> Self {
     Self {
+      count: stats.count,
       min: stats.min,
       max: stats.max,
       sum: stats.sum,
       mean: stats.mean,
+      variance: stats.variance,
+      standard_deviation: stats.standard_deviation,
+      skewness: stats.skewness,
+      kurtosis: stats.kurtosis,
     }
   }
 }

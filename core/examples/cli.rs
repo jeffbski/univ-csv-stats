@@ -30,10 +30,15 @@ fn main() -> Result<()> {
 
     // If successful, print the statistics.
     println!("\n--- Statistics for 'Amount Received' ---");
-    println!("Min:     {:.2}", stats.min);
-    println!("Max:     {:.2}", stats.max);
-    println!("Sum:     {:.2}", stats.sum);
-    println!("Mean:    {:.2}", stats.mean);
+    println!("Count:              {}", stats.count);
+    println!("Min:                {:.4}", stats.min);
+    println!("Max:                {:.4}", stats.max);
+    println!("Sum:                {:.4}", stats.sum);
+    println!("Mean:               {:.4}", stats.mean);
+    println!("Variance:           {:.4}", stats.variance);
+    println!("Standard Deviation: {:.4}", stats.standard_deviation);
+    println!("Skewness:           {:.4}", stats.skewness);
+    println!("Kurtosis:           {:.4}", stats.kurtosis);
     println!("----------------------------------------");
 
     Ok(())

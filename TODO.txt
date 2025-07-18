@@ -1,0 +1,18 @@
+
+is there an easy way to convert all attributes in a struct?
+let user2 = User {
+        email: String::from("another@example.com"),
+        ..user1
+    };
+
+	only works if they are the same names and types
+	https://doc.rust-lang.org/book/ch05-01-defining-structs.html
+
+is .into() needed?
+
+is wasm calculate_stats_from_file work?, I don't think we have file access
+
+add string to struct
+
+https://github.com/Zerounary/struct-convert
+https://mcarton.github.io/rust-derivative/latest/index.html

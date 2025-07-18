@@ -10,10 +10,15 @@
  * necessary code to convert this struct to and from a JavaScript object.
  */
 export interface SelectedStats {
+  count: number
   min: number
   max: number
   sum: number
   mean: number
+  variance: number
+  standardDeviation: number
+  skewness: number
+  kurtosis: number
 }
 /**
  * A Node.js function that calculates statistics from a CSV file.

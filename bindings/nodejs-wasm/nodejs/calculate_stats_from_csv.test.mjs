@@ -19,18 +19,30 @@ test('calculate_stats_from_csv should return correct statistics for a valid CSV 
   // Call the wasm function.
   const result = calculate_stats_from_csv(csvData);
 
-  // Define the expected outcome based on test.csv
   const expected = {
+    count: 3,
     min: 0.01,
     max: 14675.57,
     sum: 18372.92,
-    mean: 18372.92 / 3.0
+    mean: 18372.92 / 3,
+    variance: 38840427.15282223,
+    standard_deviation: 6232.208850224953,
+    skewness: 0.5250785969178626,
+    kurtosis: -1.5
   };
 
-  // Assert that the actual results match the expected results.
+  // Assert that the calculated stats match the expected values.
+  t.is(result.count, expected.count, 'Count value should be correct');
   t.is(result.min, expected.min, 'Min value should be correct');
   t.is(result.max, expected.max, 'Max value should be correct');
   t.is(result.sum, expected.sum, 'Sum value should be correct');
+  t.is(result.variance, expected.variance, 'Variance value should be correct');
+  t.is(result.standard_deviation, expected.standard_deviation, 'Standard deviation value should be correct');
+  t.is(result.skewness, expected.skewness, 'Skewness value should be correct');
+  t.is(result.kurtosis, expected.kurtosis, 'Kurtosis value should be correct');
+
+  // For floating-point numbers like the mean, it's best to check for
+  // approximate equality to avoid precision issues.
   t.true(Math.abs(result.mean - expected.mean) < 1e-9, 'Mean value should be correct');
 
   // In wasm-bindgen, when a struct is returned, memory is allocated on the
