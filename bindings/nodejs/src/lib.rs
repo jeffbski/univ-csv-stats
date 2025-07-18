@@ -4,6 +4,7 @@
 extern crate napi_derive;
 
 use napi::{Error as NapiError, Status};
+use struct_convert::Convert;
 use univ_csv_stats_core::{
   SelectedStats as CoreSelectedStats, calculate_stats_from_file as core_calculate_stats,
 };
@@ -13,7 +14,8 @@ use univ_csv_stats_core::{
 /// The `#[napi(object)]` attribute directs `napi-rs` to generate the
 /// necessary code to convert this struct to and from a JavaScript object.
 #[napi(object)]
-#[derive(Debug)]
+#[derive(Debug, Convert)]
+#[convert(from = "CoreSelectedStats")]
 pub struct SelectedStats {
   pub count: u32,
   pub min: f64,
@@ -24,24 +26,6 @@ pub struct SelectedStats {
   pub standard_deviation: f64,
   pub skewness: f64,
   pub kurtosis: f64,
-}
-
-/// This implementation allows for a clean conversion from the core library's
-/// `SelectedStats` struct into our Node.js-compatible `SelectedStats` struct.
-impl From<CoreSelectedStats> for SelectedStats {
-  fn from(stats: CoreSelectedStats) -> Self {
-    Self {
-      count: stats.count,
-      min: stats.min,
-      max: stats.max,
-      sum: stats.sum,
-      mean: stats.mean,
-      variance: stats.variance,
-      standard_deviation: stats.standard_deviation,
-      skewness: stats.skewness,
-      kurtosis: stats.kurtosis,
-    }
-  }
 }
 
 /// A Node.js function that calculates statistics from a CSV file.

@@ -1,3 +1,4 @@
+use struct_convert::Convert;
 use wasm_bindgen::prelude::*;
 
 // By default, wasm-bindgen runs in a browser context, which doesn't have
@@ -9,7 +10,8 @@ use univ_csv_stats_core::{SelectedStats as CoreSelectedStats, calculate_stats};
 // The wasm-bindgen attribute generates the necessary JavaScript "glue" code to
 // convert this Rust struct into a JavaScript object that can be easily used.
 #[wasm_bindgen]
-#[derive(Debug)]
+#[derive(Debug, Convert)]
+#[convert(from = "CoreSelectedStats")]
 pub struct SelectedStats {
     pub count: u32,
     pub min: f64,
@@ -20,24 +22,6 @@ pub struct SelectedStats {
     pub standard_deviation: f64,
     pub skewness: f64,
     pub kurtosis: f64,
-}
-
-// This implementation allows for a clean conversion from the core library's
-// `SelectedStats` struct into our wasm-bindgen-compatible `SelectedStats` struct.
-impl From<CoreSelectedStats> for SelectedStats {
-    fn from(stats: CoreSelectedStats) -> Self {
-        Self {
-            count: stats.count,
-            min: stats.min,
-            max: stats.max,
-            sum: stats.sum,
-            mean: stats.mean,
-            variance: stats.variance,
-            standard_deviation: stats.standard_deviation,
-            skewness: stats.skewness,
-            kurtosis: stats.kurtosis,
-        }
-    }
 }
 
 /// Calculates statistics from a string of CSV data.

@@ -1,5 +1,6 @@
 use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
+use struct_convert::Convert;
 use thiserror::Error;
 use univ_csv_stats_core::{
     SelectedStats as CoreSelectedStats, StatsError as CoreStatsError,
@@ -29,7 +30,8 @@ impl From<PyStatsError> for PyErr {
 /// The `#[pyo3(get)]` attribute on each field automatically creates a getter,
 /// making the fields accessible from Python.
 #[pyclass]
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Convert)]
+#[convert(from = "CoreSelectedStats")]
 pub struct PySelectedStats {
     #[pyo3(get)]
     pub count: u32,
@@ -49,24 +51,6 @@ pub struct PySelectedStats {
     pub skewness: f64,
     #[pyo3(get)]
     pub kurtosis: f64,
-}
-
-// This implementation allows us to easily convert the core library's
-// `SelectedStats` struct into our Python-compatible `PySelectedStats`.
-impl From<CoreSelectedStats> for PySelectedStats {
-    fn from(stats: CoreSelectedStats) -> Self {
-        Self {
-            count: stats.count,
-            min: stats.min,
-            max: stats.max,
-            sum: stats.sum,
-            mean: stats.mean,
-            variance: stats.variance,
-            standard_deviation: stats.standard_deviation,
-            skewness: stats.skewness,
-            kurtosis: stats.kurtosis,
-        }
-    }
 }
 
 /// A Python function that calculates statistics from a CSV file.

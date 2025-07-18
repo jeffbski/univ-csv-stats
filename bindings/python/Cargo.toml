@@ -12,6 +12,7 @@ crate-type = ["cdylib"]
 univ-csv-stats-core = { path = "../../core" }
 pyo3 = { workspace = true, features = ["default", "extension-module"] }
 thiserror = { workspace = true }
+struct-convert = { workspace = true }
 
 [build-dependencies]
 pyo3-build-config = { version = "0.25.1" }
