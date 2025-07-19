@@ -48,11 +48,13 @@ test-core:
 
 [working-directory('bindings/nodejs')]
 test-nodejs:
+    napi build --platform
     pnpm install
     pnpm test
 
 [working-directory('bindings/nodejs-wasm')]
 test-nodejs-wasm:
+    wasm-pack build --dev --target nodejs --out-dir wasm/pkg
     pnpm install
     pnpm test
 
