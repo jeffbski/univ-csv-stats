@@ -10,7 +10,10 @@ run-cli *ARGS:
     cargo run -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
 
 # Build all targets
-build:
+build: build-core build-python build-nodejs build-nodejs-wasm
+
+# Build all in rust workspace
+build-workspace:
     cargo build --workspace --release
 
 # Build core library
@@ -31,8 +34,11 @@ build-nodejs:
 build-nodejs-wasm:
     wasm-pack build --target nodejs --out-dir wasm/pkg
 
-# Run tests
-test:
+# Run all tests
+test: test-workspace test-python test-nodejs test-nodejs-wasm
+
+# Run cargo tests in workspace
+test-workspace:
     cargo test --workspace
 
 test-core:
