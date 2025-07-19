@@ -48,10 +48,12 @@ test-core:
 
 [working-directory('bindings/nodejs')]
 test-nodejs:
+    pnpm install
     pnpm test
 
 [working-directory('bindings/nodejs-wasm')]
 test-nodejs-wasm:
+    pnpm install
     pnpm test
 
 [working-directory('bindings/python')]
