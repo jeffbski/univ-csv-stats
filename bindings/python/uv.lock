@@ -185,6 +185,7 @@ wheels = [
 
 [[package]]
 name = "univ-csv-stats-python"
+version = "0.1.0"
 source = { editable = "." }
 
 [package.optional-dependencies]

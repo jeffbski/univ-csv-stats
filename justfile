@@ -54,7 +54,8 @@ test-nodejs-wasm:
 
 [working-directory('bindings/python')]
 test-python:
-    ./.venv/bin/pytest
+    uv venv --allow-existing
+    uv run --extra tests pytest
 
 # Clean all build artifacts
 clean:
