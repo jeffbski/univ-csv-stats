@@ -28,11 +28,13 @@ build-python:
 [working-directory('bindings/nodejs')]
 build-nodejs:
     napi build --platform --release
+    pnpm install
 
 # Build Node.js wasm bindings
 [working-directory('bindings/nodejs-wasm')]
 build-nodejs-wasm:
     wasm-pack build --target nodejs --out-dir wasm/pkg
+    pnpm install
 
 # Run all tests
 test: test-workspace test-python test-nodejs test-nodejs-wasm
