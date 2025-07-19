@@ -15,3 +15,11 @@ anyhow = "1.0"
 clap = "4.0"
 pyo3 = { version = "0.25.0", features = ["default", "extension-module"] }
 thiserror = "1.0"
+
+[profile.release]
+lto = true
+strip = "symbols"
+
+[profile.release.package."univ-csv-stats-nodejs-wasm"]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"
