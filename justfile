@@ -9,6 +9,18 @@ run-cli-subset:
 run-cli *ARGS:
     cargo run -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
 
+# Run Python CLI example which uses the rust library
+[working-directory('bindings/python')]
+run-cli-python *ARGS:
+    uv venv --allow-existing
+    uv run maturin develop --release
+    uv run python/cli.py -- {{ARGS}}
+
+# Run Nodejs CLI example which uses the rust library
+[working-directory('bindings/nodejs')]
+run-cli-nodejs *ARGS:
+    node cli.js {{ARGS}}
+
 # Build all targets
 build: build-core build-python build-nodejs build-nodejs-wasm
 
@@ -61,6 +73,7 @@ test-nodejs-wasm:
 [working-directory('bindings/python')]
 test-python:
     uv venv --allow-existing
+    uv run maturin develop --release
     uv run --extra tests pytest
 
 # Clean all build artifacts

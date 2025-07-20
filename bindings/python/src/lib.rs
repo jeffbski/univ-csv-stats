@@ -2,8 +2,7 @@ use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use thiserror::Error;
 use univ_csv_stats_core::{
-    SelectedStats as CoreSelectedStats, StatsError as CoreStatsError,
-    calculate_stats_from_file as core_calculate_stats,
+    SelectedStats as CoreSelectedStats, StatsError as CoreStatsError, calculate_stats,
 };
 
 // Create a new error type for the Python bindings. This allows us to have a
@@ -69,26 +68,26 @@ impl From<CoreSelectedStats> for PySelectedStats {
     }
 }
 
-/// A Python function that calculates statistics from a CSV file.
+/// Calculates statistics from a string of CSV data.
 ///
-/// This function is a wrapper around the `calculate_stats_from_file` function
-/// from the core Rust library. It takes a file path as a string, calls the
-/// core function, and returns the result as a Python object. Errors are
-/// converted into Python exceptions.
+/// This function is a wrapper around the `calculate_stats` function from the
+/// core Rust library. It takes CSV data as a string, calls the core function,
+/// and returns the result as a Python object. Errors are converted into Python
+/// exceptions.
 #[pyfunction]
-fn calculate_stats_from_file(path: &str) -> Result<PySelectedStats, PyStatsError> {
-    let stats = core_calculate_stats(path)?;
+fn calculate_stats_from_csv(csv_data: &str) -> Result<PySelectedStats, PyStatsError> {
+    let stats = calculate_stats(csv_data.as_bytes())?;
     Ok(stats.into())
 }
 
 /// Defines the Python module `univ_csv_stats_python`.
 ///
 /// This function is called by the Python interpreter when the module is imported.
-/// It adds the `calculate_stats_from_file` function and the `PySelectedStats`
+/// It adds the `calculate_stats_from_csv` function and the `PySelectedStats`
 /// class to the module, making them available in Python.
 #[pymodule]
 fn univ_csv_stats_python(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(calculate_stats_from_file, m)?)?;
+    m.add_function(wrap_pyfunction!(calculate_stats_from_csv, m)?)?;
     m.add_class::<PySelectedStats>()?;
     Ok(())
 }
