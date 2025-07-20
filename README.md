@@ -48,6 +48,29 @@ uv add --dev pytest
 uv run pytest
 ```
 
+To fix rust analyzer in zed add the following to root/.zed/settings.json
+```json
+{
+  "lsp": {
+    "rust-analyzer": {
+      "extra_env": {
+        "PYO3_PYTHON": "bindings/python/.venv/bin/python"
+      }
+    }
+  }
+}
+```
+
+or for vscode root/.vscode/settings.json
+```json
+{
+  "rust-analyzer.cargo.extraEnv": {
+    "PYO3_PYTHON": "${workspaceFolder}/bindings/python/.venv/bin/python"
+  }
+}
+```
+
+
 ## Node.js setup
 
 ```

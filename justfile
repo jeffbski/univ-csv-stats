@@ -21,6 +21,11 @@ run-cli-python *ARGS:
 run-cli-nodejs *ARGS: build-nodejs
     node cli.js {{ARGS}}
 
+# Run Nodejs-wasm CLI example which uses the rust library
+[working-directory('bindings/nodejs-wasm')]
+run-cli-nodejs-wasm *ARGS: build-nodejs
+    node nodejs/cli.mjs {{ARGS}}
+
 # Build all targets
 build: build-core build-python build-nodejs build-nodejs-wasm
 
