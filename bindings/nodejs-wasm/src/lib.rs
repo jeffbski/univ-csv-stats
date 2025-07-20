@@ -4,10 +4,7 @@ use wasm_bindgen::prelude::*;
 // filesystem access. Therefore, instead of passing a file path, we need to
 // pass the file's content as a string. The JavaScript host will be
 // responsible for reading the file.
-use univ_csv_stats_core::{
-    SelectedStats as CoreSelectedStats, calculate_stats,
-    calculate_stats_from_file as core_calculate_stats_from_file,
-};
+use univ_csv_stats_core::{SelectedStats as CoreSelectedStats, calculate_stats};
 
 // The wasm-bindgen attribute generates the necessary JavaScript "glue" code to
 // convert this Rust struct into a JavaScript object that can be easily used.
@@ -59,13 +56,6 @@ pub fn calculate_stats_from_csv(csv_data: String) -> Result<SelectedStats, JsVal
     // Call the core function, mapping the success and error cases to types
     // that wasm-bindgen can understand.
     calculate_stats(csv_data.as_bytes())
-        .map(|stats| stats.into()) // Convert CoreSelectedStats to SelectedStats
-        .map_err(|err| JsValue::from_str(&err.to_string())) // Convert CoreStatsError to JsValue
-}
-
-#[wasm_bindgen]
-pub fn calculate_stats_from_file(path: String) -> Result<SelectedStats, JsValue> {
-    core_calculate_stats_from_file(&path)
         .map(|stats| stats.into()) // Convert CoreSelectedStats to SelectedStats
         .map_err(|err| JsValue::from_str(&err.to_string())) // Convert CoreStatsError to JsValue
 }
