@@ -24,12 +24,8 @@ def main():
     print(f"Calculating statistics for '{file_path}'...")
 
     try:
-        # Read the file content in Python first.
-        with open(file_path, 'r', encoding='utf-8') as f:
-            csv_data = f.read()
-
-        # Call the core logic, passing the CSV content as a string.
-        stats = univ_csv_stats_python.calculate_stats_from_csv(csv_data)
+        # Call the core logic from the Rust extension module.
+        stats = univ_csv_stats_python.calculate_stats_from_file(file_path)
 
         # If successful, print the statistics in a formatted way.
         print("\n--- Statistics for 'Amount Received' ---")
@@ -44,9 +40,8 @@ def main():
         print(f"Kurtosis:           {stats.kurtosis:.4f}")
         print("----------------------------------------")
 
-    except (ValueError, IOError) as e:
-        # Handle both calculation errors from Rust (ValueError) and file
-        # reading errors from Python (IOError).
+    except ValueError as e:
+        # The Rust errors are converted to Python's ValueError.
         # Print the error message to stderr and exit.
         print(f"Error: {e}", file=sys.stderr)
         sys.exit(1)

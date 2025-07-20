@@ -18,7 +18,7 @@ run-cli-python *ARGS:
 
 # Run Nodejs CLI example which uses the rust library
 [working-directory('bindings/nodejs')]
-run-cli-nodejs *ARGS:
+run-cli-nodejs *ARGS: build-nodejs
     node cli.js {{ARGS}}
 
 # Build all targets
@@ -73,7 +73,7 @@ test-nodejs-wasm:
 [working-directory('bindings/python')]
 test-python:
     uv venv --allow-existing
-    uv run maturin develop --release
+    uv run maturin develop
     uv run --extra tests pytest
 
 # Clean all build artifacts
