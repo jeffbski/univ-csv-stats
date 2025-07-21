@@ -16,6 +16,12 @@ run-cli-python *ARGS:
     uv run maturin develop --release
     uv run python/cli.py -- {{ARGS}}
 
+# Run Python native CLI example
+[working-directory('bindings/python')]
+run-cli-python-native *ARGS:
+    uv venv --allow-existing
+    uv run python/cli-native.py -- {{ARGS}}
+
 # Run Nodejs CLI example which uses the rust library
 [working-directory('bindings/nodejs')]
 run-cli-nodejs *ARGS: build-nodejs
