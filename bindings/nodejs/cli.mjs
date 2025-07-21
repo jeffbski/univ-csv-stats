@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const { calculateStatsFromFile } = require('./index.js');
-const path = require('path');
+import { calculateStatsFromFile } from './index.js';
+import path from 'node:path';
 
 /**
  * A simple CLI to calculate statistics from a CSV file using the Rust-powered

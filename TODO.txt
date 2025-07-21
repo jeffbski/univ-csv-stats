@@ -1,6 +1,2 @@
 
-is wasm calculate_stats_from_file work?, I don't think we have file access
-
-create a run-cli for each binding so we can
-
 Create a native one without rust as well that we can compare with.
