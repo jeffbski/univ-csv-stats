@@ -124,4 +124,27 @@ mod tests {
         let result = calculate_stats(data.as_bytes());
         assert!(matches!(result, Err(StatsError::Csv(_))));
     }
+
+    #[test]
+    fn test_calculate_stats_from_file_valid() {
+        // The test data is located in the `test_data` directory, relative to the crate root.
+        let stats = calculate_stats_from_file("../test_data/test.csv").unwrap();
+
+        assert_eq!(stats.count, 3);
+        assert_eq!(stats.min, 0.01);
+        assert_eq!(stats.max, 14675.57);
+        assert_eq!(stats.sum, 18372.92);
+        assert_eq!(stats.mean, 6124.306666666667);
+        assert_eq!(stats.variance, 38840427.15282223);
+        assert_eq!(stats.standard_deviation, 6232.208850224953);
+        assert_eq!(stats.skewness, 0.5250785969178626);
+        assert_eq!(stats.kurtosis, -1.5);
+    }
+
+    #[test]
+    fn test_calculate_stats_from_file_non_existent() {
+        // Test with a non-existent file
+        let result = calculate_stats_from_file("non_existent_file.csv");
+        assert!(matches!(result, Err(StatsError::Io(_))));
+    }
 }
