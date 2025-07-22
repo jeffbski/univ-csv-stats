@@ -12,7 +12,7 @@ members = ["core", "bindings/nodejs", "bindings/nodejs-wasm", "bindings/python"]
 [workspace.dependencies]
 # Shared dependencies across workspace
 anyhow = "1.0"
-clap = "4.0"
+clap = "4.5"
 pyo3 = { version = "0.25.1", features = ["default", "extension-module"] }
 thiserror = "1.0"
 
