@@ -14,7 +14,7 @@ const fs = require('fs');
 test('calculateStatsFromFile should return correct statistics for a valid CSV file', (t) => {
   // Construct the absolute path to the test CSV file.
   // __dirname is a global variable in CommonJS that gives the directory of the current module.
-  const testFilePath = path.join(__dirname, 'test_data', 'test.csv');
+  const testFilePath = path.join(__dirname, '..', '..', 'test_data', 'test.csv');
 
   // Call the function from the native addon.
   const result = calculateStatsFromFile(testFilePath);
@@ -72,7 +72,7 @@ test('calculateStatsFromFile should throw an error if the file does not exist', 
 test('calculateStatsFromFile should throw an error for a malformed CSV file', (t) => {
   // Create a temporary, malformed CSV file for this test.
   // This approach is more robust than relying on a static malformed file.
-  const malformedCsvPath = path.join(__dirname, 'test_data', 'malformed.csv');
+  const malformedCsvPath = path.join(__dirname, '..', '..', 'test_data', 'malformed.csv');
   fs.writeFileSync(malformedCsvPath, 'header1,Amount Received\nvalue1,"not-a-number"\n');
 
   const error = t.throws(

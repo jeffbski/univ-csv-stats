@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 test('calculate_stats_from_csv should return correct statistics for a valid CSV file', (t) => {
   // Construct the absolute path to the test CSV file.
-  const testFilePath = path.join(__dirname, '..', 'test_data', 'test.csv');
+  const testFilePath = path.join(__dirname, '..', '..', '..', 'test_data', 'test.csv');
   const csvData = fs.readFileSync(testFilePath, 'utf8');
 
   // Call the wasm function.

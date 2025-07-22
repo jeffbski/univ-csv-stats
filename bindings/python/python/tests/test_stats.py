@@ -11,7 +11,7 @@ def test_calculate_stats_from_file():
     # Get the absolute path to the test CSV file.
     # The test runner will execute from a different directory, so we need
     # to construct the path relative to this test file.
-    csv_path = Path(__file__).parent / "data" / "test.csv"
+    csv_path = Path(__file__).parent / ".." / ".." / ".." / ".." / "test_data" / "test.csv"
 
     # Call the function to calculate stats
     stats = univ_csv_stats_python.calculate_stats_from_file(str(csv_path))
