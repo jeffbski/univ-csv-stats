@@ -104,3 +104,37 @@ fmt:
 # Lint code
 lint:
     cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+# Benchmarks - record time and memory
+
+# Run CLI example
+bench-run-cli *ARGS:
+    /usr/bin/time -l -h -p cargo run -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
+
+# Run Python CLI example which uses the rust library
+[working-directory('bindings/python')]
+bench-run-cli-python *ARGS:
+    uv venv --allow-existing
+    uv run maturin develop --release
+    /usr/bin/time -l -h -p uv run python/cli.py -- {{ARGS}}
+
+# Run Python native CLI example
+[working-directory('bindings/python')]
+bench-run-cli-python-native *ARGS:
+    uv venv --allow-existing
+    /usr/bin/time -l -h -p uv run python/cli-native.py -- {{ARGS}}
+
+# Run Nodejs CLI example which uses the rust library
+[working-directory('bindings/nodejs')]
+bench-run-cli-nodejs *ARGS: build-nodejs
+    /usr/bin/time -l -h -p node cli.mjs {{ARGS}}
+
+# Run Nodejs native CLI example
+[working-directory('bindings/nodejs')]
+bench-run-cli-nodejs-native *ARGS: build-nodejs
+    /usr/bin/time -l -h -p node cli-native.mjs {{ARGS}}
+
+# Run Nodejs-wasm CLI example which uses the rust library
+[working-directory('bindings/nodejs-wasm')]
+bench-run-cli-nodejs-wasm *ARGS: build-nodejs
+    /usr/bin/time -l -h -p node nodejs/cli.mjs {{ARGS}}
