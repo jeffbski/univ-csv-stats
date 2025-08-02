@@ -4,11 +4,11 @@ default:
 
 # Run CLI example with subset-ibm.csv
 run-cli-subset:
-    cargo run -p univ-csv-stats-core --example cli -- /Users/jeff/Downloads/ibm-trans-anti-money-laundering/subset-ibm.csv
+    ./target/release/univ-csv-stats /Users/jeff/Downloads/ibm-trans-anti-money-laundering/subset-ibm.csv
 
 # Run CLI example
 run-cli *ARGS:
-    cargo run -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
+    ./target/release/univ-csv-stats {{ ARGS }}
 
 # Run Python CLI example which uses the rust library
 [working-directory('bindings/python')]
@@ -107,7 +107,7 @@ lint:
 
 # Run CLI example
 bench-run-cli *ARGS:
-    /usr/bin/time -l -h -p cargo run -q -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
+    /usr/bin/time -l -h -p ./target/release/univ-csv-stats {{ ARGS }}
 
 # Run Python CLI example which uses the rust library
 [working-directory('bindings/python')]
@@ -141,3 +141,7 @@ capture-stats *ARGS:
 # Capture mini stats (w/WASM)
 capture-mini-stats *ARGS:
     ./bench-mini-serial.sh {{ARGS}} 2>&1 | rg "Output|Count|real|resident"
+
+# Race
+race *ARGS:
+    ./bench-all.sh {{ARGS}} 2>&1 | rg "Output|Count|real|resident"
