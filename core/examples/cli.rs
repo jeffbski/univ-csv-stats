@@ -29,7 +29,7 @@ fn main() -> Result<()> {
         .with_context(|| format!("Failed to process the CSV file '{file_path_str}'"))?;
 
     // If successful, print the statistics.
-    println!("\n--- Statistics for 'Amount Received' ---");
+    println!("\nOutput for rust-core");
     println!("Count:              {}", stats.count);
     println!("Min:                {:.4}", stats.min);
     println!("Max:                {:.4}", stats.max);

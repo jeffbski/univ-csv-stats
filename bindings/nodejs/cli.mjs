@@ -27,7 +27,8 @@ function main() {
     const stats = calculateStatsFromFile(absolutePath);
 
     // If successful, print the statistics in a formatted way.
-    console.log("\n--- Statistics for 'Amount Received' ---");
+    console.log('\nOutput for nodejs-rust');
+    console.log("--- Statistics for 'Amount Received' ---");
     console.log(`Count:              ${stats.count}`);
     console.log(`Min:                ${stats.min.toFixed(4)}`);
     console.log(`Max:                ${stats.max.toFixed(4)}`);

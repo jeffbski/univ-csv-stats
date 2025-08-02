@@ -28,7 +28,8 @@ def main():
         stats = univ_csv_stats_python.calculate_stats_from_file(file_path)
 
         # If successful, print the statistics in a formatted way.
-        print("\n--- Statistics for 'Amount Received' ---")
+        print("\nOutput for python-rust")
+        print("--- Statistics for 'Amount Received' ---")
         print(f"Count:              {stats.count}")
         print(f"Min:                {stats.min:.4f}")
         print(f"Max:                {stats.max:.4f}")

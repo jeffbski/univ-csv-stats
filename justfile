@@ -1,3 +1,4 @@
+# List the just commands
 default:
     just --list
 
@@ -12,14 +13,12 @@ run-cli *ARGS:
 # Run Python CLI example which uses the rust library
 [working-directory('bindings/python')]
 run-cli-python *ARGS:
-    uv venv --allow-existing
     uv run maturin develop --release
     uv run python/cli.py -- {{ARGS}}
 
 # Run Python native CLI example
 [working-directory('bindings/python')]
 run-cli-python-native *ARGS:
-    uv venv --allow-existing
     uv run python/cli-native.py -- {{ARGS}}
 
 # Run Nodejs CLI example which uses the rust library
@@ -88,7 +87,6 @@ test-nodejs-wasm:
 
 [working-directory('bindings/python')]
 test-python:
-    uv venv --allow-existing
     uv run maturin develop
     uv run --extra tests pytest
 
@@ -109,32 +107,37 @@ lint:
 
 # Run CLI example
 bench-run-cli *ARGS:
-    /usr/bin/time -l -h -p cargo run -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
+    /usr/bin/time -l -h -p cargo run -q -r -p univ-csv-stats-core --example cli -- {{ ARGS }}
 
 # Run Python CLI example which uses the rust library
 [working-directory('bindings/python')]
 bench-run-cli-python *ARGS:
-    uv venv --allow-existing
-    uv run maturin develop --release
     /usr/bin/time -l -h -p uv run python/cli.py -- {{ARGS}}
 
 # Run Python native CLI example
 [working-directory('bindings/python')]
 bench-run-cli-python-native *ARGS:
-    uv venv --allow-existing
     /usr/bin/time -l -h -p uv run python/cli-native.py -- {{ARGS}}
 
 # Run Nodejs CLI example which uses the rust library
 [working-directory('bindings/nodejs')]
-bench-run-cli-nodejs *ARGS: build-nodejs
+bench-run-cli-nodejs *ARGS:
     /usr/bin/time -l -h -p node cli.mjs {{ARGS}}
 
 # Run Nodejs native CLI example
 [working-directory('bindings/nodejs')]
-bench-run-cli-nodejs-native *ARGS: build-nodejs
+bench-run-cli-nodejs-native *ARGS:
     /usr/bin/time -l -h -p node cli-native.mjs {{ARGS}}
 
 # Run Nodejs-wasm CLI example which uses the rust library
 [working-directory('bindings/nodejs-wasm')]
-bench-run-cli-nodejs-wasm *ARGS: build-nodejs
+bench-run-cli-nodejs-wasm *ARGS:
     /usr/bin/time -l -h -p node nodejs/cli.mjs {{ARGS}}
+
+# Capture stats
+capture-stats *ARGS:
+    ./bench-serial.sh {{ARGS}} 2>&1 | rg "Output|Count|real|resident"
+
+# Capture mini stats (w/WASM)
+capture-mini-stats *ARGS:
+    ./bench-mini-serial.sh {{ARGS}} 2>&1 | rg "Output|Count|real|resident"
