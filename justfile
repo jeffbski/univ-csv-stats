@@ -12,8 +12,7 @@ run-cli *ARGS:
 
 # Run Python CLI example which uses the rust library
 [working-directory('bindings/python')]
-run-cli-python *ARGS:
-    uv run maturin develop --release
+run-cli-python *ARGS: build-python-wheel
     uv run python/cli.py -- {{ARGS}}
 
 # Run Python native CLI example
@@ -37,7 +36,7 @@ run-cli-nodejs-wasm *ARGS: build-nodejs
     node nodejs/cli.mjs {{ARGS}}
 
 # Build all targets
-build: build-core build-python build-nodejs build-nodejs-wasm
+build: build-core build-python-wheel build-nodejs build-nodejs-wasm
 
 # Build all in rust workspace
 build-workspace:
@@ -50,6 +49,11 @@ build-core:
 # Build Python bindings
 build-python:
     maturin build --release -m bindings/python/Cargo.toml
+
+# Build Python wheel
+[working-directory('bindings/python')]
+build-python-wheel: build-python
+   uv run maturin develop --release
 
 # Build Node.js bindings
 [working-directory('bindings/nodejs')]
