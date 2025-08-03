@@ -35,7 +35,7 @@ run-cli-nodejs-native *ARGS: build-nodejs
 run-cli-nodejs-wasm *ARGS: build-nodejs
     node nodejs/cli.mjs {{ARGS}}
 
-# Build all targets
+# Build all targets in release mode
 build: build-core build-python-wheel build-nodejs build-nodejs-wasm
 
 # Build all in rust workspace
