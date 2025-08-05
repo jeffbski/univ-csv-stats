@@ -12,7 +12,7 @@ run-cli *ARGS:
 
 # Run Python CLI example which uses the rust library
 [working-directory('bindings/python')]
-run-cli-python *ARGS: build-python-wheel
+run-cli-python *ARGS:
     uv run python/cli.py -- {{ARGS}}
 
 # Run Python native CLI example
@@ -22,17 +22,17 @@ run-cli-python-native *ARGS:
 
 # Run Nodejs CLI example which uses the rust library
 [working-directory('bindings/nodejs')]
-run-cli-nodejs *ARGS: build-nodejs
+run-cli-nodejs *ARGS:
     node cli.mjs {{ARGS}}
 
 # Run Nodejs native CLI example
 [working-directory('bindings/nodejs')]
-run-cli-nodejs-native *ARGS: build-nodejs
+run-cli-nodejs-native *ARGS:
     node cli-native.mjs {{ARGS}}
 
 # Run Nodejs-wasm CLI example which uses the rust library
 [working-directory('bindings/nodejs-wasm')]
-run-cli-nodejs-wasm *ARGS: build-nodejs
+run-cli-nodejs-wasm *ARGS:
     node nodejs/cli.mjs {{ARGS}}
 
 # Build all targets in release mode
@@ -149,3 +149,7 @@ capture-mini-stats *ARGS:
 # Race
 race *ARGS:
     ./bench-all.sh {{ARGS}} 2>&1 | rg "Output|Count|real|resident"
+
+# Race with sound
+race-sound *ARGS:
+    ./bench-all.sh {{ARGS}} 2>&1 | rg "Output|Count|real|resident" --line-buffered | tee /dev/stderr | (read line; afplay ~/Downloads/456966__funwithsound__success-fanfare-trumpets.mp3)
