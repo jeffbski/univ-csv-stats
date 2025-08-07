@@ -59,13 +59,13 @@ build-python-wheel: build-python
 [working-directory('bindings/nodejs')]
 build-nodejs:
     napi build --platform --release
-    pnpm install
+    pnpm install --prefer-offline
 
 # Build Node.js wasm bindings
 [working-directory('bindings/nodejs-wasm')]
 build-nodejs-wasm:
     wasm-pack build --target nodejs --out-dir wasm/pkg
-    pnpm install
+    pnpm install --prefer-offline
 
 # Run all tests
 test: test-workspace test-python test-nodejs test-nodejs-wasm
@@ -80,13 +80,13 @@ test-core:
 [working-directory('bindings/nodejs')]
 test-nodejs:
     napi build --platform
-    pnpm install
+    pnpm install --prefer-offline
     pnpm test
 
 [working-directory('bindings/nodejs-wasm')]
 test-nodejs-wasm:
     wasm-pack build --dev --target nodejs --out-dir wasm/pkg
-    pnpm install
+    pnpm install --prefer-offline
     pnpm test
 
 [working-directory('bindings/python')]
