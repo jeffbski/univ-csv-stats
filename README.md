@@ -10,27 +10,39 @@ Provides a rust CLI example and python and node.js bindings
 
 univ-csv-stats/
 │
-├── Cargo.toml         # Workspace root manifest
-├── justfile           # Task runner configuration
+├── Cargo.toml                         # Workspace root manifest
+├── justfile                           # Task runner configuration
 │
-├── core/              # Core library implementation
+├── core/                              # Core implementation in Rust
 │   ├── Cargo.toml
 │   └── src/
-│       └── lib.rs
+│       ├── lib.rs                     # Core Rust library
+│       └── main.rs                    # Rust CLI implementation
 │
-├── examples/          # CLI moved to examples
-│   └── cli.rs
-│
-├── bindings/          # Unified bindings folder
-│   ├── python/        # PyO3 Python bindings
+├── bindings/                           # Unified bindings folder
+│   ├── python/                         # PyO3 Python bindings
 │   │   ├── Cargo.toml
-│   │   └── src/
-│   │       └── lib.rs
+│   │   ├── src/
+│   │   │   └── lib.rs                 # PyO3 Rust library wrapper
+│   │   └── python/
+│   │       ├── cli.py                  # Python CLI calling PyO3 Rust Library
+│   │       └── cli-native.py           # Native Python CLI
 │   │
-│   └── nodejs/        # Node.js NAPI bindings
+│   ├── nodejs/                         # Node.js NAPI-rs bindings
+│   │   ├── Cargo.toml
+│   │   ├── src/
+│   │   │   └── lib.rs                 # NAPI-rs Rust library wrapper
+│   │   ├── cli.mjs                     # Node.js CLI calling NAPI-rs Rust Library
+│   │   └── cli-native.mjs              # Native Node.js CLI
+│   │
+│   └── nodejs-wasm/                   # Node.js WASM bindings
 │       ├── Cargo.toml
-│       └── src/
-│           └── lib.rs
+│       ├── src/
+│       │   └── lib.rs                 # Node.js WASM library wrapper
+│       └── nodejs/
+│           └── cli.mjs                 # Node.js CLI calling WASM Rust Library
+│
+├── test_data/                         # Test CSV files
 │
 └── README.md
 
