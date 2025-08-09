@@ -50,8 +50,8 @@ univ-csv-stats/
 
 ## Python setup
 
-PyO3 / Maturin Getting Started: https://pyo3.rs/v0.25.1/getting-started.html
-Maturin Users Guide: https://www.maturin.rs/
+- PyO3 / Maturin Getting Started: https://pyo3.rs/v0.25.1/getting-started.html
+- Maturin Users Guide: https://www.maturin.rs/
 
 ```sh
 uv tool install maturin # add $HOME/.local/bin to $PATH or use uvx to run maturin
@@ -101,8 +101,8 @@ pnpm install
 
 ## WASM setup
 
-wasm-pack: https://github.com/drager/wasm-pack
-wasm-bindgen book: https://wasm-bindgen.github.io/wasm-bindgen/
+- wasm-pack: https://github.com/drager/wasm-pack
+- wasm-bindgen book: https://wasm-bindgen.github.io/wasm-bindgen/
 
 ```
 cargo install wasm-pack
