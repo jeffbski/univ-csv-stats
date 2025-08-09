@@ -8,6 +8,8 @@ Provides CLI examples in rust, python and node.js which use compare native use w
 
 ## Structure
 
+(Note: This section does not display well on Github, but should in your editor)
+
 univ-csv-stats/
 │
 ├── Cargo.toml                         # Workspace root manifest
@@ -48,6 +50,9 @@ univ-csv-stats/
 
 ## Python setup
 
+PyO3 / Maturin Getting Started: https://pyo3.rs/v0.25.1/getting-started.html
+Maturin Users Guide: https://www.maturin.rs/
+
 ```sh
 uv tool install maturin # add $HOME/.local/bin to $PATH or use uvx to run maturin
 cd bindings/python
@@ -85,12 +90,19 @@ or for vscode root/.vscode/settings.json
 
 ## Node.js setup
 
-```
- pnpm add -g @napi-rs/cli
+For NAPI-rs see Getting Started: https://napi.rs/docs/introduction/getting-started
 
+```
+pnpm add -g @napi-rs/cli
+cd bindings/nodejs
+napi new
+pnpm install
 ```
 
 ## WASM setup
+
+wasm-pack: https://github.com/drager/wasm-pack
+wasm-bindgen book: https://wasm-bindgen.github.io/wasm-bindgen/
 
 ```
 cargo install wasm-pack
