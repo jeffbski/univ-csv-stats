@@ -2,9 +2,9 @@
 
 ## Description
 
-Rust library which will calculate stats for a csv file on disk and returns them.
+Rust library which will calculate stats for a csv file on disk and returns them as a structure.
 
-Provides a rust CLI example and python and node.js bindings
+Provides CLI examples in rust, python and node.js which use compare native use with using a rust library. Also includes a Node.js wasm implementation.
 
 ## Structure
 
