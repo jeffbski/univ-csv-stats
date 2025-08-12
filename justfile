@@ -152,4 +152,5 @@ race *ARGS:
 
 # Race with sound
 race-sound *ARGS:
+    afplay ~/Downloads/drag-race-549905__sherryhanmore__pro_vid_20201221_150557_00_015_2.wav &
     ./bench-all.sh {{ARGS}} 2>&1 | rg "Output|Count|real|resident" --line-buffered | tee /dev/stderr | (read line; afplay ~/Downloads/456966__funwithsound__success-fanfare-trumpets.mp3)
