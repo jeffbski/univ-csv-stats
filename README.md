@@ -8,7 +8,6 @@ Provides CLI examples in rust, python and node.js which use compare native use w
 
 ## Structure
 
-(Note: This section does not display well on Github, but should in your editor)
 ```
 univ-csv-stats/
 │
